@@ -41,3 +41,7 @@ class Client(object):
         r = requests.post(url, headers=headers)
 
         return r
+
+    def __init__(self, api_key, api_secret):
+        self.API_KEY = api_key
+        self.API_SECRET = api_secret
