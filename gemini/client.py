@@ -88,7 +88,16 @@ class Client(object):
 
     def get_past_trades(self, symbol, limit_trades, timestamp=None):
         """ https://docs.gemini.com/rest-api/#get-past-trades """
-        pass
+        endpoint = '/mytrades'
+
+        payload = {
+            'request': self.API_VERSION + endpoint,
+            'nonce': self._get_nonce(),
+            'limit_trades': limit_trades,
+            'timestamp': timestamp
+        }
+
+        return self._invoke_api(endpoint, payload).json()
 
     # Order Placement API
     # https://docs.gemini.com/rest-api/#new-order
