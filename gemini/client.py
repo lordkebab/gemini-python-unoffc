@@ -53,6 +53,7 @@ class Client(object):
     # https://docs.gemini.com/rest-api/#order-status
     # ----------------------------------------------
     def get_active_orders(self):
+        """ https://docs.gemini.com/rest-api/#get-active-orders """
         endpoint = '/orders'
 
         payload = {
@@ -63,6 +64,7 @@ class Client(object):
         return self._invoke_api(endpoint, payload).json()
 
     def get_order_status(self, order_id):
+        """ https://docs.gemini.com/rest-api/#order-status """
         endpoint = '/order/status'
 
         payload = {
@@ -74,6 +76,7 @@ class Client(object):
         return self._invoke_api(endpoint, payload).json()
 
     def get_trade_volume(self):
+        """ https://docs.gemini.com/rest-api/#get-trade-volume """
         endpoint = '/tradevolume'
 
         payload = {
@@ -84,7 +87,7 @@ class Client(object):
         return self._invoke_api(endpoint, payload).json()
 
     def get_past_trades(self, symbol, limit_trades, timestamp=None):
-        # TODO
+        """ https://docs.gemini.com/rest-api/#get-past-trades """
         pass
 
     # Order Placement API
