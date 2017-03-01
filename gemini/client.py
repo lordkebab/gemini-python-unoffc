@@ -90,5 +90,54 @@ class Client(object):
     # Order Placement API
     # https://docs.gemini.com/rest-api/#new-order
     # -------------------------------------------
-    def new_order(self, client_order_id=None, symbol, amount, price, side, type, options=None):
-        
+    def new_order(self, client_order_id, symbol, amount, price, side, type, options=None):
+        """ https://docs.gemini.com/rest-api/#new-order """
+        endpoint = '/order/new'
+
+        payload = {
+            'request': self.API_VERSION + endpoint,
+            'nonce': self._get_nonce(),
+            'client_order_id': client_order_id,
+            'symbol': symbol,
+            'amount': amount,
+            'price': price,
+            'side': side,
+            'type': 'exchange limit',
+            'options': options
+        }
+
+        return self._invoke_api(endpoint, payload).json()
+
+    def cancel_order(self, order_id):
+        """ https://docs.gemini.com/rest-api/#cancel-order """
+        endpoint = '/order/cancel'
+
+        payload = {
+            'request': self.API_VERSION + endpoint,
+            'nonce': self._get_nonce(),
+            'order_id': order_id
+        }
+
+        return self._invoke_api(endpoint, payload).json()
+
+    def cancel_session_orders(self):
+        """ https://docs.gemini.com/rest-api/#cancel-all-session-orders """
+        endpoint = '/order/cancel/session'
+
+        payload = {
+            'request': self.API_VERSION + endpoint,
+            'nonce': self._get_nonce()
+        }
+
+        return self._invoke_api(endpoint, payload).json()
+
+    def cancel_all_orders(self):
+        """ https://docs.gemini.com/rest-api/#cancel-all-active-orders """
+        endpoint = '/order/cancel/all'
+
+        payload = {
+            'request': self.API_VERSION + endpoint,
+            'nonce': self._get_nonce()
+        }
+
+        return self._invoke_api(endpoint, payload).json()
