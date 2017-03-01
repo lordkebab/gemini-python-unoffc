@@ -153,3 +153,42 @@ class Client(object):
         }
 
         return self._invoke_api(endpoint, payload).json()
+
+    # Fund Management API's
+    # https://docs.gemini.com/rest-api/#get-available-balances
+    # --------------------------------------------------------
+    def get_balance(self):
+        """ https://docs.gemini.com/rest-api/#get-available-balances """
+        endpoint = '/balances'
+
+        payload = {
+            'request': self.API_VERSION + endpoint,
+            'nonce': self._get_nonce()
+        }
+
+        return self._invoke_api(endpoint, payload).json()
+
+    def new_deposit_address(self, currency, label):
+        """ https://docs.gemini.com/rest-api/#new-deposit-address """
+        endpoint = '/' + currency + '/newAddress'
+
+        payload = {
+            'request': self.API_VERSION + endpoint,
+            'nonce': self._get_nonce(),
+            'label': label
+        }
+
+        return self._invoke_api(endpoint, payload).json()
+
+    def withdraw_crypto(self, currency, address, amount):
+        """ https://docs.gemini.com/rest-api/#withdraw-crypto-funds-to-whitelisted-address """
+        endpoint = '/withdraw/' + currency
+
+        payload = {
+            'request': self.API_VERSION + endpoint,
+            'nonce': self._get_nonce(),
+            'address': address,
+            'amount': amount
+        }
+
+        return self._invoke_api(endpoint, payload).json()
