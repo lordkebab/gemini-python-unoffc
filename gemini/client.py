@@ -25,6 +25,17 @@ class Client(object):
 
     # Private API methods
     # -------------------
+    def _handle_response(self, response):
+        """ Handles all responses from the API. Checks the return HTTP status code and formats the response in JSON. """
+
+        if str(response.status_code).startswith('2'):
+            # request was successful
+            return response.json()
+        else:
+            # TODO custom exceptions
+            print(response.json())
+            return response.json()
+
     def _get_nonce(self):
         return time.time()*1000
 
@@ -47,7 +58,7 @@ class Client(object):
 
         r = requests.post(url, headers=headers)
 
-        return r
+        return self._handle_response(r)
 
     # Order Status API
     # https://docs.gemini.com/rest-api/#order-status
@@ -61,7 +72,7 @@ class Client(object):
             'nonce': self._get_nonce()
         }
 
-        return self._invoke_api(endpoint, payload).json()
+        return self._invoke_api(endpoint, payload)
 
     def get_order_status(self, order_id):
         """ https://docs.gemini.com/rest-api/#order-status """
@@ -73,7 +84,7 @@ class Client(object):
             'order_id': order_id
         }
 
-        return self._invoke_api(endpoint, payload).json()
+        return self._invoke_api(endpoint, payload)
 
     def get_trade_volume(self):
         """ https://docs.gemini.com/rest-api/#get-trade-volume """
@@ -84,7 +95,7 @@ class Client(object):
             'nonce': self._get_nonce()
         }
 
-        return self._invoke_api(endpoint, payload).json()
+        return self._invoke_api(endpoint, payload)
 
     def get_past_trades(self, symbol, limit_trades, timestamp=None):
         """ https://docs.gemini.com/rest-api/#get-past-trades """
@@ -97,7 +108,7 @@ class Client(object):
             'timestamp': timestamp
         }
 
-        return self._invoke_api(endpoint, payload).json()
+        return self._invoke_api(endpoint, payload)
 
     # Order Placement API
     # https://docs.gemini.com/rest-api/#new-order
@@ -118,7 +129,7 @@ class Client(object):
             'options': options
         }
 
-        return self._invoke_api(endpoint, payload).json()
+        return self._invoke_api(endpoint, payload)
 
     def cancel_order(self, order_id):
         """ https://docs.gemini.com/rest-api/#cancel-order """
@@ -130,7 +141,7 @@ class Client(object):
             'order_id': order_id
         }
 
-        return self._invoke_api(endpoint, payload).json()
+        return self._invoke_api(endpoint, payload)
 
     def cancel_session_orders(self):
         """ https://docs.gemini.com/rest-api/#cancel-all-session-orders """
@@ -141,7 +152,7 @@ class Client(object):
             'nonce': self._get_nonce()
         }
 
-        return self._invoke_api(endpoint, payload).json()
+        return self._invoke_api(endpoint, payload)
 
     def cancel_all_orders(self):
         """ https://docs.gemini.com/rest-api/#cancel-all-active-orders """
@@ -152,7 +163,7 @@ class Client(object):
             'nonce': self._get_nonce()
         }
 
-        return self._invoke_api(endpoint, payload).json()
+        return self._invoke_api(endpoint, payload)
 
     # Fund Management API's
     # https://docs.gemini.com/rest-api/#get-available-balances
@@ -166,7 +177,7 @@ class Client(object):
             'nonce': self._get_nonce()
         }
 
-        return self._invoke_api(endpoint, payload).json()
+        return self._invoke_api(endpoint, payload)
 
     def new_deposit_address(self, currency, label):
         """ https://docs.gemini.com/rest-api/#new-deposit-address """
@@ -178,7 +189,7 @@ class Client(object):
             'label': label
         }
 
-        return self._invoke_api(endpoint, payload).json()
+        return self._invoke_api(endpoint, payload)
 
     def withdraw_crypto(self, currency, address, amount):
         """ https://docs.gemini.com/rest-api/#withdraw-crypto-funds-to-whitelisted-address """
@@ -191,4 +202,4 @@ class Client(object):
             'amount': amount
         }
 
-        return self._invoke_api(endpoint, payload).json()
+        return self._invoke_api(endpoint, payload)
