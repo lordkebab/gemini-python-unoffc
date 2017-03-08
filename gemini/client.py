@@ -28,8 +28,7 @@ class Client(object):
     # Private API methods
     # -------------------
     def _get_nonce(self):
-        #return time.time()*1000
-        return 1
+        return time.time()*1000
 
     def _handle_response(self, request, response):
         """ Handles all responses from the API. Checks the return HTTP status code and formats the response in JSON. """
