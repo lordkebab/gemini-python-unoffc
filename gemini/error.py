@@ -1,5 +1,9 @@
 class GeminiError(Exception):
-    """ Basic exception class for errors raised by the API Library. """
+    """
+    Basic exception class for errors raised by the API Library.
+
+    https://docs.gemini.com/rest-api/#error-codes
+    """
 
     def __init__(self, message):
         self.message = message
