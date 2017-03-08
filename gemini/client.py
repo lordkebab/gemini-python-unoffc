@@ -1,5 +1,7 @@
 from __future__ import print_function
 
+from gemini.error import raise_api_error
+
 import requests
 import base64
 import hashlib
@@ -16,7 +18,7 @@ class Client(object):
     API_KEY = ''
     API_SECRET = ''
     API_VERSION = '/v1'
-    BASE_URI = "https://api.sandbox.gemini.com" + API_VERSION
+    BASE_URI = "https://api.gemini.com" + API_VERSION
 
 
     def __init__(self, api_key, api_secret):
@@ -25,19 +27,18 @@ class Client(object):
 
     # Private API methods
     # -------------------
-    def _handle_response(self, response):
-        """ Handles all responses from the API. Checks the return HTTP status code and formats the response in JSON. """
-
-        if str(response.status_code).startswith('2'):
-            # request was successful
-            return response.json()
-        else:
-            # TODO custom exceptions
-            print(response.json())
-            return response.json()
-
     def _get_nonce(self):
-        return time.time()*1000
+        #return time.time()*1000
+        return 1
+
+    def _handle_response(self, request, response):
+        """ Handles all responses from the API. Checks the return HTTP status code and formats the response in JSON. """
+        status_code = str(response.status_code)
+
+        if not status_code.startswith('2'):
+            raise raise_api_error(request, response)
+        else:
+            return response.json()
 
     def _invoke_api(self, endpoint, payload):
         # base64 encode the payload
@@ -56,9 +57,12 @@ class Client(object):
 
         url = self.BASE_URI + endpoint
 
-        r = requests.post(url, headers=headers)
+        # build a request object in case there's an error so we can echo it
+        request = {'payload': payload, 'headers': headers, 'url': url}
 
-        return self._handle_response(r)
+        response = requests.post(url, headers=headers)
+
+        return self._handle_response(request, response)
 
     # Order Status API
     # https://docs.gemini.com/rest-api/#order-status
