@@ -3,7 +3,7 @@ Unofficial Python library for the [Gemini Exchange](https://gemini.com) REST API
 
 Installation
 ------------
-We're on PyPi!  This library is only compatible with Python 3 (right now, see "Future Enhancements" below).
+We're on PyPi!  This library is compatible with Python 2 and 3.
 
 ```
 pip install gemini-python-unoffc
@@ -43,7 +43,6 @@ Future Enhancements
 -------------------
 Some feautres planned for later releases include:
 - 100% test coverage
-- Python 2.x compatibility
 - Websocket interface
 - Travis CI builds (goes along with 100% test coverage)
 - Those neat lil' icons showing "Build Passing," and "100% test coverage"
