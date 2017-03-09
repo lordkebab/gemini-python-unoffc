@@ -6,7 +6,7 @@ setup(
     name='gemini-python',
     version=gemini.__version__,
     packages=find_packages(),
-    install_requires=['requests>=2.13.0']
+    install_requires=['requests>=2.13.0'],
     author='Matt Selph',
     author_email='mattselph@outlook.com',
     description='An Unofficial Python library for the Gemini Exchange REST API.',
