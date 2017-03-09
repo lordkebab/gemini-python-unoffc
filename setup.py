@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 import gemini
 
 setup(
-    name='gemini-python',
+    name='gemini-python-unoffc',
     version=gemini.__version__,
     packages=find_packages(),
     install_requires=['requests>=2.13.0'],
