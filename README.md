@@ -21,8 +21,10 @@ Now you are ready to use the library.  Everything is called via a `Client` objec
 ```python
 from gemini.client import Client
 
-c = Client(api_key='API_KEY', api_secret='API_SECRET')
+c = Client(api_key='API_KEY', api_secret='API_SECRET', sandbox=True)
 ```
+
+Note the `sandbox` argument.  The default is `False`, so if you want to test on the exchange's sandbox, you need to override this argument and excplicitly set it to `True`.
 
 The `Client` object returns JSON from the exchange's API.  
 
