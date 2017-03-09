@@ -47,3 +47,7 @@ Some feautres planned for later releases include:
 - Websocket interface
 - Travis CI builds (goes along with 100% test coverage)
 - Those neat lil' icons showing "Build Passing," and "100% test coverage"
+
+License
+-------
+This software is licensed under the [MIT License](https://github.com/mattselph/gemini-python-unoffc/blob/master/LICENSE).
