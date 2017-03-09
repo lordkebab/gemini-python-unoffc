@@ -15,15 +15,16 @@ class Client(object):
     Full API docs are here: https://docs.gemini.com
     """
 
-    API_KEY = ''
-    API_SECRET = ''
     API_VERSION = '/v1'
-    BASE_URI = "https://api.gemini.com" + API_VERSION
 
-
-    def __init__(self, api_key, api_secret):
+    def __init__(self, api_key, api_secret, sandbox=False):
         self.API_KEY = api_key
         self.API_SECRET = api_secret
+
+        if not sandbox:
+            self.BASE_URI = "https://api.gemini.com" + self.API_VERSION
+        else:
+            self.BASE_URI = "https://api.sandbox.gemini.com" + self.API_VERSION
 
     # Private API methods
     # -------------------
