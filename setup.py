@@ -1,25 +1,27 @@
-from distutils.core import setup
+from setuptools import setup, find_packages
 
 import gemini
 
 setup(
     name='gemini-python',
     version=gemini.__version__,
-    download_url='https://github.com/mattselph/gemini-python-unoffc/tarball/%s' % (gemini.__version__),
-    description='Unofficial Python library for the Gemini Exchange REST API.',
+    packages=find_packages(),
+    install_requires=['requests>=2.13.0']
     author='Matt Selph',
     author_email='mattselph@outlook.com',
-    license='MIT License',
+    description='An Unofficial Python library for the Gemini Exchange REST API.',
+    license='MIT',
+    keywords='bitcoin ethereum api gemini',
     url='https://github.com/mattselph/gemini-python-unoffc',
-    packages=['gemini'],
     classifiers=[
+        'Intended Audience :: Developers',
         'License :: OSI Approved :: MIT License',
         'Operating System :: OS Independent',
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.2',
         'Programming Language :: Python :: 3.3',
         'Programming Language :: Python :: 3.4',
-        'Programming Language :: Python :: 3.5'
-    ],
-    keywords = ['api', 'bitcoin', 'ethereum', 'gemini']
+        'Programming Language :: Python :: 3.5',
+        'Topic :: Software Development :: Libraries :: Python Modules'
+    ]
 )
