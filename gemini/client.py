@@ -291,7 +291,7 @@ class Client(object):
 
     def new_deposit_address(self, currency, label):
         """ https://docs.gemini.com/rest-api/#new-deposit-address """
-        endpoint = '/' + currency + '/newAddress'
+        endpoint = '/deposit/' + currency + '/newAddress'
 
         payload = {
             'request': self.API_VERSION + endpoint,
