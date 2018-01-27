@@ -213,6 +213,7 @@ class Client(object):
         payload = {
             'request': self.API_VERSION + endpoint,
             'nonce': self._get_nonce(),
+            'symbol': symbol,
             'limit_trades': limit_trades,
             'timestamp': timestamp
         }
