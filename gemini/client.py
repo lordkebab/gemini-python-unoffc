@@ -313,3 +313,14 @@ class Client(object):
         }
 
         return self._invoke_api(endpoint, payload, pub=False)
+
+    def get_notional_volume(self):
+        """ https://docs.gemini.com/rest-api/#get-notional-volume """
+        endpoint = '/notionalvolume'
+
+        payload = {
+            'request': self.API_VERSION + endpoint,
+            'nonce': self._get_nonce(),
+        }
+
+        return self._invoke_api(endpoint, payload, pub=False)
